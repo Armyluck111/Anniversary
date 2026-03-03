@@ -15,14 +15,15 @@
 }
 
 body{
-    height:100vh;
-   background: linear-gradient(135deg, #8b0000, #ff4d6d);
+    min-height:100vh;
+    background: linear-gradient(135deg, #8b0000, #ff4d6d);
     display:flex;
     justify-content:center;
     align-items:center;
-    overflow:hidden;
+    overflow-x:hidden;
     color:white;
     text-align:center;
+    padding:30px 0;
 }
 
 .container{
@@ -32,11 +33,12 @@ body{
     border-radius:25px;
     box-shadow:0 10px 40px rgba(0,0,0,0.2);
     animation: fadeIn 2s ease;
-    max-width:600px;
+    max-width:900px;
+    width:95%;
 }
 
 h1{
-    font-size:36px;
+    font-size:32px;
     margin-bottom:15px;
 }
 
@@ -48,9 +50,33 @@ p{
 .counter{
     font-size:22px;
     font-weight:bold;
-    margin-bottom:20px;
+    margin-bottom:30px;
 }
 
+/* 🔥 جاليري الصور */
+.gallery{
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.gallery img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:20px;
+    border:3px solid rgba(255,255,255,0.6);
+    transition:0.4s ease;
+    cursor:pointer;
+}
+
+.gallery img:hover{
+    transform:scale(1.08);
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* زرار */
 button{
     padding:12px 25px;
     border:none;
@@ -67,7 +93,7 @@ button:hover{
     transform:scale(1.05);
 }
 
-/* 💌 رسالة خاصة */
+/* 💌 رسالة */
 .message-box{
     position:fixed;
     top:50%;
@@ -92,10 +118,6 @@ button:hover{
     transform:translate(-50%,-50%) scale(1);
 }
 
-.message-box h2{
-    margin-bottom:15px;
-}
-
 .close-btn{
     margin-top:15px;
     background:#ff4f81;
@@ -106,7 +128,6 @@ button:hover{
     cursor:pointer;
 }
 
-/* Overlay */
 .overlay{
     position:fixed;
     top:0;
@@ -124,7 +145,7 @@ button:hover{
     visibility:visible;
 }
 
-/* قلوب متحركة */
+/* قلوب */
 .heart{
     position:absolute;
     bottom:-10px;
@@ -134,14 +155,8 @@ button:hover{
 }
 
 @keyframes floatUp{
-    0%{
-        transform:translateY(0) scale(1);
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-100vh) scale(1.5);
-        opacity:0;
-    }
+    0%{transform:translateY(0) scale(1);opacity:1;}
+    100%{transform:translateY(-100vh) scale(1.5);opacity:0;}
 }
 
 @keyframes fadeIn{
@@ -154,8 +169,9 @@ button:hover{
 <body>
 
 <div class="container">
+
     <h1>💍مع بعض العمر كله يا يارو بحبك اد الدنيا♥</h1>
-     <audio controls>
+<audio controls>
         <source src="https://serv100.albumaty.com/2025/Albumaty.Com_bhaa_sltan_ana_msh_maahm.mp3" type="audio/mpeg" autoplay>
         المتصفح الخاص بك لا يدعم تشغيل الصوت.
     </audio>
@@ -167,15 +183,29 @@ button:hover{
 
     <div class="counter" id="counter"></div>
 
-    <button onclick="showMessage()">❤️دوسي علي قلبي💌</button>
+    <!-- 🔥 الجاليري -->
+    <div class="gallery">
+        <img src="https://i.ibb.co/Kj4WTdnY/Screenshot-20260303-162420.jpg">
+        <img src="https://i.ibb.co/v4cgwBvg/IMG-20251013-WA0197.jpg">
+        <img src="https://i.ibb.co/0jhwdCd5/Snapchat-1227168712.jpg">
+        <img src="https://i.ibb.co/RW9qjdd/IMG-20251219-WA0027.jpg">
+        <img src="https://i.ibb.co/NXv9nQ5/Snapchat-812134097.jpg">
+        <img src="https://i.ibb.co/7dc3GMR7/Snapchat-444857346.jpg">
+        <img src="https://i.ibb.co/WWNKjMbc/Snapchat-862495526.jpg">
+        <img src="https://i.ibb.co/pjV7HRVs/IMG-8261.jpg">
+        <img src="https://i.ibb.co/5w5fb0D/IMG-20251205-WA0219-1.jpg">
+        <img src="https://i.ibb.co/ymTCmCN4/Picsart-25-12-05-12-53-29-435.jpg">
+        <img src="https://i.ibb.co/0yz044QB/Picsart-25-12-05-12-52-56-141.jpg">
+    </div>
+
+    <button onclick="showMessage()">♥دوسي علي قلبي💌</button>
+
 </div>
 
-<!-- Overlay -->
 <div class="overlay" id="overlay" onclick="closeMessage()"></div>
 
-<!-- 💌 رسالة -->
 <div class="message-box" id="messageBox">
-   
+    
     <p>
         كل شهر وإنتِ قلبي وروحي وحياتي 💍  
         وجودك جنبي هو أحلى حاجة حصلتلي ✨  
@@ -185,37 +215,30 @@ button:hover{
 </div>
 
 <script>
-
-// 🔥 غير التاريخ ده بتاريخ خطوبتك
 const engagementDate = new Date("2025-12-04");
 
 function updateCounter(){
     const now = new Date();
     const diff = now - engagementDate;
-
     const days = Math.floor(diff / (1000*60*60*24));
     const months = Math.floor(days / 30);
-
     document.getElementById("counter").innerHTML =
-        `عدي علينا 3شهور وانتي خطيبتي ونور عيني محبتش ادك♥`;
+        ` عدي علينا 3 شهور وانتي خطيبتي ونور عيني❤️`;
 }
 
 updateCounter();
 setInterval(updateCounter,1000);
 
-// 💌 إظهار الرسالة
 function showMessage(){
     document.getElementById("messageBox").classList.add("active");
     document.getElementById("overlay").classList.add("active");
 }
 
-// ❌ إغلاق الرسالة
 function closeMessage(){
     document.getElementById("messageBox").classList.remove("active");
     document.getElementById("overlay").classList.remove("active");
 }
 
-// قلوب عشوائية
 function createHeart(){
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -223,17 +246,11 @@ function createHeart(){
     heart.style.left = Math.random()*100 + "vw";
     heart.style.animationDuration = (3 + Math.random()*3) + "s";
     document.body.appendChild(heart);
-
     setTimeout(()=>{heart.remove();},6000);
 }
 
 setInterval(createHeart,400);
-
 </script>
 
 </body>
 </html>
-
-
-
-
