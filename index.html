@@ -169,7 +169,43 @@ button:hover{
 <body>
 
 <div class="container">
+<script>
+const engagementDate = new Date("2025-12-04");
 
+function updateCounter(){
+    const now = new Date();
+    const diff = now - engagementDate;
+    const days = Math.floor(diff / (1000*60*60*24));
+    const months = Math.floor(days / 30);
+    document.getElementById("counter").innerHTML =
+        `❤️عدي علينا 3 شهور وانتي خطيبتي ونور عيني `;
+}
+
+updateCounter();
+setInterval(updateCounter,1000);
+
+function showMessage(){
+    document.getElementById("messageBox").classList.add("active");
+    document.getElementById("overlay").classList.add("active");
+}
+
+function closeMessage(){
+    document.getElementById("messageBox").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
+}
+
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (3 + Math.random()*3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(()=>{heart.remove();},6000);
+}
+
+setInterval(createHeart,400);
+</script>
     <h1>💍مع بعض العمر كله يا يارو بحبك اد الدنيا♥</h1>
 
     <p>
@@ -211,43 +247,8 @@ button:hover{
     <button class="close-btn" onclick="closeMessage()">إغلاق</button>
 </div>
 
-<script>
-const engagementDate = new Date("2025-12-04");
 
-function updateCounter(){
-    const now = new Date();
-    const diff = now - engagementDate;
-    const days = Math.floor(diff / (1000*60*60*24));
-    const months = Math.floor(days / 30);
-    document.getElementById("counter").innerHTML =
-        `عدّى علينا تقريباً ${months} شهر و ${days} يوم حب ❤️`;
-}
-
-updateCounter();
-setInterval(updateCounter,1000);
-
-function showMessage(){
-    document.getElementById("messageBox").classList.add("active");
-    document.getElementById("overlay").classList.add("active");
-}
-
-function closeMessage(){
-    document.getElementById("messageBox").classList.remove("active");
-    document.getElementById("overlay").classList.remove("active");
-}
-
-function createHeart(){
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.animationDuration = (3 + Math.random()*3) + "s";
-    document.body.appendChild(heart);
-    setTimeout(()=>{heart.remove();},6000);
-}
-
-setInterval(createHeart,400);
-</script>
 
 </body>
 </html>
+
